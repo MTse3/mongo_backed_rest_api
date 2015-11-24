@@ -24,6 +24,15 @@ playerRouter.get('/player/:team', function(req, res) {
   });
 });
 
+playerRouter.post('/player', bodyParser.json(), function(req, res) {
+  var newPlayer = new Player(req.body);
+  newPlayer.save(function(err, data) {
+    if (err) return handleError(err, res);
+
+    res.json(data);
+  });
+});
+
 //put requests require a player's id
 playerRouter.put('/player/:id', bodyParser.json(), function(req, res) {
   var playerData = req.body;
