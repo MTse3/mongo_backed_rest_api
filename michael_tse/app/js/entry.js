@@ -1,9 +1,11 @@
-require('angular/angular');
+require('angular/angular');//don't save into variable! it won't work
 var angular = window.angular;
 
-var playerApp = angular.module('mlbplayer', []);
+//make angular app
+var playerApp = angular.module('bearstream', []);
+//want $scope as 1st parameter of function. how to do dependency injection
 playerApp.controller('GreetingController', ['$scope', function($scope) {
-  $scope.greeting = 'Go Mariners!';
+  $scope.greeting = 'Go Mariners';
 
   $scope.alertGreeting = function() {
     alert($scope.greeting);

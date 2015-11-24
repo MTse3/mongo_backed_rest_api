@@ -4,15 +4,16 @@
   <meta charset="UTF-8">
   <title>MLB Player</title>
 </head>
-  <body data-ng-app="mlbplayer">
-    <main data-ng-controller="GreetingController">
-      <h1>Sweet Stuff</h1>
-      <h2>{{greeting}}</h2>
+<body data-ng-app="bearstream">
+  <main data-ng-controller="GreetingController">
+    <h1>MLB Player</h1>
+    <h2>{{greeting}}</h2>
 
-      <input type="text" data-ng-model="greeting">
-      <button data-ng-click="alertGreeting()">Give me player!</button>
-    </main>
+    <input type="text" data-ng-model="greeting">
 
-    <script type="bundle.js"></script>
-  </body>
+    <button data-ng-click="alertGreeting()">Get Player!</button>
+  </main>
+
+  <script src="bundle.js"></script>
+</body>
 </html>

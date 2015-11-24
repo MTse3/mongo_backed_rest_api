@@ -5,6 +5,21 @@ var appFiles = ['server.js', 'lib/**/*.js'];
 var testFiles = ['./test/**/*.js'];
 var webpack = require('webpack-stream');
 
+gulp.task('static:dev', function() {
+  gulp.src('app/**/*.html')
+  .pipe(gulp.dest('build/'));
+});
+
+gulp.task('webpack:dev', function() {
+  return gulp.src('app/js/entry.js')
+  .pipe(webpack({
+    output: {
+      filename: 'bundle.js'
+    }
+  }))
+  .pipe(gulp.dest('build/'));
+});
+
 gulp.task('jshint:test', function(){
   return gulp.src(testFiles)
   .pipe(jshint({
@@ -30,20 +45,6 @@ gulp.task('mocha', ['jshint'], function(){
   .pipe(mocha({reporter:'spec'}));
 });
 
-gulp.task('static:dev', function() {
-  gulp.src('app/**/*.html')
-  .pipe(gulp.dest('build/'));
-});
-
-gulp.task('webpack:dev', function() {
-  return gulp.src('app/js/entry.js')
-  .pipe(webpack({
-    output: {
-      filename: 'bundle.js'
-    }
-  }))
-  .pipe(gulp.dest('build/'));
-});
 
 
 gulp.task('jshint', ['jshint:test', 'jshint:app']);
