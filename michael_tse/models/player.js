@@ -10,6 +10,8 @@ var playerBase = new mongoose.Schema({
   team: {type: String, default: 'free_agent'},
   bat: String,
   throwing: String,
+  admin: String,
+  adminId: String,
 });
 
 module.exports = mongoose.model('Player', playerBase);
