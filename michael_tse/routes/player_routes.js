@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var Player = require(__dirname + '/../models/player')
 var handleError = require(__dirname + '/../lib/handleServerError');
+var eatAuth = require(__dirname + '/../lib/eat_auth');
 
 var playerRouter = module.exports = exports = express.Router();
 
@@ -24,7 +25,7 @@ playerRouter.get('/player/:team', function(req, res) {
   });
 });
 
-playerRouter.post('/player', bodyParser.json(), function(req, res) {
+playerRouter.post('/player', bodyParser.json(), eatAuth, function(req, res) {
   var newPlayer = new Player(req.body);
   newPlayer.save(function(err, data) {
     if (err) return handleError(err, res);

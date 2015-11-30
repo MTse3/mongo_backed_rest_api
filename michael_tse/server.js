@@ -4,6 +4,7 @@ var app = express();
 var playerRouter = require(__dirname + '/routes/player_routes');
 
 var authRouter = require(__dirname + '/routes/auth_routes');
+process.env.APP_SECRET = process.env.APP_SECRET || 'secret!!';
 
 var fs = require('fs');
 var app = require('express')();

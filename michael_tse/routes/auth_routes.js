@@ -11,10 +11,17 @@ authRouter.post('/signup', jsonParser, function(req, res) {
   user.username = req.body.username;
   user.hashPassword(req.body.password);
 
+  if (user.username)
+
+  //check unique username
   user.save(function(err, data) {
     if (err) return handleError(err, res);
-    //profit
-    res.json({msg: 'user created'});
+
+    user.generateToken(function(err, token) {
+      if (err) return handleError(err, res);
+
+      res.json({token: token});
+    });;
   });
 });
 
@@ -40,6 +47,10 @@ authRouter.get('/signin', basicHttp, function(req, res) {
      return res.status(401).json({msg: 'NOPE! Not authenticated!'});
     }
 
-    res.json({msg: 'You are who we thought you were!!!!'});
+    user.generateToken(function(err, token) {
+      if (err) return handleError(err, res);
+
+      res.json({token: token});
+    });
   });
 });
