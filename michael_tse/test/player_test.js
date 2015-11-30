@@ -7,6 +7,7 @@ process.env.MONGOLAB_URI = 'mongodb://localhost/player_test';
 require(__dirname + '/../server');
 var mongoose = require('mongoose');
 var Player = require(__dirname + '/../models/player');
+var User = require(__dirname + '/../models/user');
 
 describe('player routes', function() {
   after(function (done) {
@@ -15,8 +16,26 @@ describe('player routes', function() {
     });
   });
 
+  before(function(done) {
+    var user = new User();
+    user.username = 'testtoken';
+    user.auth.basic.username = 'testtoken';
+    user.hashPassword('testtokenpass', function(err, res) {
+      if (err) throw err;
+      user.save(function(err, data) {
+        if (err) throw err;
+        user.generateToken(function(err, token) {
+          if (err) throw err;
+          this.token = token;
+          done();
+        }.bind(this));
+      }.bind(this));
+    }.bind(this));
+    done();
+  });
+
   it('should be able to create a player', function(done) {
-    var playerData = {firstName: 'Felix', lastName: 'Hernandez' };
+    var playerData = {firstName: 'Felix', lastName: 'Hernandez', token: this.token};
     chai.request('localhost:3000')
       .post('/api/player')
       .send(playerData)

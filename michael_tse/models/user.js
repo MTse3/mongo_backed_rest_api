@@ -18,7 +18,14 @@ userSchema.methods.hashPassword = function(password) {
 };
 
 userSchema.methods.checkPassword = function(password) {
+  console.log(password);
+  console.log(this.auth.basic.password);
   return bcrypt.compareSync(password, this.auth.basic.password);
+};
+
+userSchema.methods.generateToken = function(callback) {
+  var id = this._id;
+  eat.encode({id: id}, process.env.APP_SECRET, callback);
 };
 
 module.exports = mongoose.model('User', userSchema);
