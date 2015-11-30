@@ -27,7 +27,7 @@ playerRouter.get('/player', function(req, res, next) {
 });
 
 //get request to get players by team name(team name must start with upper case)
-playerRouter.get('/player/:team', bodyParser.json(), eatAuth, function(req, res) {
+playerRouter.get('/player/:team', bodyParser.json(), function(req, res) {
   Player.find({team: req.params.team.toString() }, function(err, data) {
     if (err) return handleError(err, res);
 
@@ -38,7 +38,7 @@ playerRouter.get('/player/:team', bodyParser.json(), eatAuth, function(req, res)
 playerRouter.post('/player', bodyParser.json(), eatAuth, function(req, res) {
   var newPlayer = new Player(req.body);
   newPlayer.adminId = req.user._id;
-  newBear.admin = req.user.username;
+  newPlayer.admin = req.user.username;
   newPlayer.save(function(err, data) {
     if (err) return handleError(err, res);
 
@@ -47,7 +47,7 @@ playerRouter.post('/player', bodyParser.json(), eatAuth, function(req, res) {
 });
 
 //put requests require a player's id
-playerRouter.put('/player/:id', bodyParser.json(), function(req, res) {
+playerRouter.put('/player/:id', bodyParser.json(), eatAuth, function(req, res) {
   var playerData = req.body;
   delete playerData._id;
   Player.update({_id: req.params.id.toString()}, playerData, function(err, data) {

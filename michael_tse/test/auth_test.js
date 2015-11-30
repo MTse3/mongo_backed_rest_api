@@ -50,6 +50,7 @@ describe('auth', function() {
       var user = new User();
       user.username = 'usertest';
       user.auth.basic.username = 'usertest';
+      user.auth.basic.password = 'test1';
       user.hashPassword('test1');
         user.save(function(err, data) {
           if (err) throw err;

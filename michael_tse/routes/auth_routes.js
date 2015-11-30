@@ -12,8 +12,8 @@ authRouter.post('/signup', jsonParser, function(req, res) {
   user.hashPassword(req.body.password);
 
   if (user.username)
+  //needs to check for unique username
 
-  //need to check unique username
   user.save(function(err, data) {
     if (err) return handleError(err, res);
 
@@ -39,7 +39,7 @@ authRouter.get('/signin', basicHttp, function(req, res) {
 
     if (!user) {
       console.log('no user auth provided');
-      return res.status(401).json({msg: 'NOPE! Not authenticated!'});
+      return res.status(401).json({msg: 'NOPE! Not authenticat-ed!'});
     }
 
     if (!user.checkPassword(req.auth.password)) {
