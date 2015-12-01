@@ -2,8 +2,13 @@ var mongoose = require('mongoose');
 var express = require('express');
 var app = express();
 var playerRouter = require(__dirname + '/routes/player_routes');
+
+var authRouter = require(__dirname + '/routes/auth_routes');
+process.env.APP_SECRET = process.env.APP_SECRET || 'secret!!';
+
 var fs = require('fs');
 var app = require('express')();
+
 
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/mlb_player')
 
@@ -22,6 +27,7 @@ app.get('/:filename', function(req, res, next) {
 });
 
 app.use('/api', playerRouter);
+app.use('/api', authRouter);
 
 app.use(function(req, res) {
   res.status(404).send('could not find file')

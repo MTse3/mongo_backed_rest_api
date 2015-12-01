@@ -7,6 +7,7 @@ process.env.MONGOLAB_URI = 'mongodb://localhost/player_test';
 require(__dirname + '/../server');
 var mongoose = require('mongoose');
 var Player = require(__dirname + '/../models/player');
+var User = require(__dirname + '/../models/user');
 
 describe('player routes', function() {
   after(function (done) {
@@ -15,8 +16,23 @@ describe('player routes', function() {
     });
   });
 
+  before(function(done) {
+    var user = new User();
+    user.username = 'usertoken';
+    user.auth.basic.username = 'usertoken';
+    user.hashPassword('usertokenpass');
+      user.save(function(err, data) {
+        if (err) throw err;
+        user.generateToken(function(err, token) {
+          if (err) throw err;
+          this.token = token;
+          done();
+        }.bind(this));
+      }.bind(this));
+  });
+
   it('should be able to create a player', function(done) {
-    var playerData = {firstName: 'Felix', lastName: 'Hernandez' };
+    var playerData = {firstName: 'Felix', lastName: 'Hernandez', token: this.token};
     chai.request('localhost:3000')
       .post('/api/player')
       .send(playerData)
@@ -51,7 +67,7 @@ describe('player routes', function() {
 
   describe('to modify the player database', function() {
     beforeEach(function(done) {
-      (new Player({firstName: 'David', lastName: 'Price', team: 'free_agent',})).save(function(err, data) {
+      (new Player({firstName: 'David', lastName: 'Price', team: 'free_agent', token: this.token})).save(function(err, data) {
         expect(err).to.eql(null);
         this.player = data;
         done();
@@ -61,7 +77,7 @@ describe('player routes', function() {
     it('should be able to modify a player', function(done) {
       chai.request('localhost:3000')
         .put('/api/player/' + this.player._id)
-        .send({team: 'Mariners'})
+        .send({team: 'Mariners', token: this.token})
         .end(function(err, res) {
           expect(err).to.eql(null);
           expect(res.body.msg).to.eql('update success!');
@@ -72,6 +88,7 @@ describe('player routes', function() {
     it('should be able to remove a player', function(done) {
       chai.request('localhost:3000')
         .delete('/api/player/' + this.player._id)
+        // .set('token', this.token)
         .end(function(err, res) {
           expect(err).to.eql(null);
           expect(res.body.msg).to.eql('delete success!');
