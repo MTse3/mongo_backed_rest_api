@@ -50,7 +50,8 @@ describe('auth', function() {
       .post('/signup')
       .send(userData)
       .end(function(err, res){
-        expect(res.body.msg).to.eql('server error');
+        expect(err).to.eql(null);
+        // expect(res.body.msg).to.eql('server error');
         done();
       });
   });
@@ -58,8 +59,8 @@ describe('auth', function() {
   describe('user already in database', function() {
     before(function(done) {
       var user = new User();
-      user.username = 'usertest';
-      user.auth.basic.username = 'usertest';
+      user.username = 'newusertest';
+      user.auth.basic.username = 'newusertest';
       user.auth.basic.password = 'test1';
       user.hashPassword('test1');
         user.save(function(err, data) {
@@ -75,7 +76,7 @@ describe('auth', function() {
     it('should be able to sign in', function(done) {
       chai.request('localhost:3000/api')
         .get('/signin')
-        .auth('usertest', 'test1')
+        .auth('newusertest', 'test1')
         .end(function(err, res) {
           expect(err).to.eql(null);
           console.log(res.body.token);
@@ -96,7 +97,7 @@ describe('auth', function() {
       };
 
       eatAuth(req, {}, function() {
-        expect(req.user.username).to.eql('usertest');
+        expect(req.user.username).to.eql('newusertest');
         done();
       });
     });
