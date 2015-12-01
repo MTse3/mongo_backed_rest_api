@@ -44,25 +44,24 @@ describe('auth', function() {
         done();
       });
   });
-  // it('should not duplicate a user with same username', function(done){
-  //     var userData = {username: 'usertest', password:'testpass'};
-  //     chai.request('http://localhost:3000')
-  //     .post('/signup')
-  //     .send(userData)
-  //     .end(function(err, res){
-  //       expect(res.body.msg).to.eql('user already made!');
-  //       done();
-  //     });
-  //   });
-  // })
+  it('should not duplicate a user with same username', function(done){
+      var userData = {username: 'usertest', password:'testpass'};
+      chai.request('http://localhost:3000')
+      .post('/signup')
+      .send(userData)
+      .end(function(err, res){
+        expect(res.body.msg).to.eql('server error');
+        done();
+      });
+  });
 
   describe('user already in database', function() {
     before(function(done) {
       var user = new User();
       user.username = 'usertest';
       user.auth.basic.username = 'usertest';
-      user.auth.basic.password = 'pass';
-      user.hashPassword('pass');
+      user.auth.basic.password = 'test1';
+      user.hashPassword('test1');
         user.save(function(err, data) {
           if (err) throw err;
           user.generateToken(function(err, token) {
@@ -76,12 +75,11 @@ describe('auth', function() {
     it('should be able to sign in', function(done) {
       chai.request('localhost:3000/api')
         .get('/signin')
-        .auth('usertest', 'pass')
+        .auth('usertest', 'test1')
         .end(function(err, res) {
           expect(err).to.eql(null);
-          // console.log(res.body.token)
-          // expect(res.body.token).to.have.length.above(0);
-          // expect(res.body).to.have.property('token');
+          console.log(res.body.token);
+          expect(res.body.token).to.have.length.above(0);
           done();
         });
     });
