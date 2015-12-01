@@ -7,17 +7,9 @@ var eatAuth = require(__dirname + '/../lib/eat_auth');
 var playerRouter = module.exports = exports = express.Router();
 
 playerRouter.use(bodyParser.json());
-playerRouter.get('/player', eatAuth, function(req, res, next) {
-  Player.find().count(function(err, count) {
-    if (err) return handleError(err, res);
-
-    res.send('The total number of stored players is: ' + count);
-    next();
-  });
-});
 
 //get request to see the total number of players stored in the database
-playerRouter.get('/player', function(req, res, next) {
+playerRouter.get('/player', bodyParser.json(), function(req, res, next) {
   Player.find().count(function(err, count) {
     if (err) return handleError(err, res);
 
