@@ -5,15 +5,26 @@ var handleError = require(__dirname + '/../lib/handleServerError');
 
 var playerRouter = module.exports = exports = express.Router();
 
-//get request to see the total number of players stored in the database
-playerRouter.get('/player', function(req, res, next) {
-  Player.find().count(function(err, count) {
+// //get request to see the total number of players stored in the database
+// playerRouter.get('/player', function(req, res, next) {
+//   Player.find().count(function(err, count) {
+//     if (err) return handleError(err, res);
+
+//     res.send('The total number of stored players is: ' + count);
+//     next();
+//   });
+// });
+
+//get request to get players by team name(team name must start with upper case)
+playerRouter.get('/player/', function(req, res, next) {
+  Player.find({}, function(err, data) {
     if (err) return handleError(err, res);
 
-    res.send('The total number of stored players is: ' + count);
+    res.json(data);
     next();
   });
 });
+
 
 //get request to get players by team name(team name must start with upper case)
 playerRouter.get('/player/:team', function(req, res) {

@@ -5,15 +5,77 @@
   <title>MLB Player</title>
 </head>
 <body data-ng-app="mlbplayer">
-  <main data-ng-controller="GreetingController">
-    <h1>MLB Player</h1>
-    <h2>{{greeting}}</h2>
+  <main data-ng-controller="PlayersController" data-ng-init="getAll()">
+    <ul id="errorslist">
+      <li data-ng-repeat="error in errors">{{error}}</li>
+    </ul>
 
-    <input type="text" data-ng-model="greeting">
+    <form name="newPlayerForm" data-ng-submit="create(newPlayer)">
+      <h2>New player:</h2>
 
-    <button data-ng-click="alertGreeting()">Get Player!</button>
+      <label for="newPlayerFirstName">First Name:</label>
+      <input type="text" id="newPlayerFirstName" required data-ng-model="newPlayer.firstName">
+
+      <label for="newPlayerLastName">Last Name:</label>
+      <input type="text" id="newPlayerLastName" required data-ng-model="newPlayer.lastName">
+
+      <label for="newPlayerPosition">Position: </label>
+      <input type="text" id="newPlayerPosition" data-ng-model="newPlayer.postion" placeholder="-">
+
+      <label for="newPlayerNumber">Number:</label>
+      <input type="text" id="newPlayerNumber" required data-ng-model="newPlayer.number">
+
+      <label for="newPlayerTeam">Team:</label>
+      <input type="text" id="newPlayerTeam" data-ng-model="newPlayer.team" placeholder="free_agent">
+
+      <label for="newPlayerBat">Bats:</label>
+      <input type="text" id="newPlayerBat" required data-ng-model="newPlayer.bat">
+
+      <label for="newPlayerThrowing">Throws:</label>
+      <input type="text" id="newPlayerThrowing" required data-ng-model="newPlayer.throwing">
+
+
+      <button type="submit" data-ng-disabled="newPlayerForm.$invalid">Create New Player</button>
+    </form>
+
+    <ul id="playerlist">
+      <li data-ng-repeat="player in players">
+        {{player.firstName}}
+        <form name="playerForm{{player._id}}" data-ng-submit="update(player)" data-ng-if="player.editing">
+          <h2>Witness Protection for {{player.firstName}}</h2>
+
+          <label for="playerFirstName{{player._id}}">First Name:</label>
+          <input type="text" id="playerFirstName{{player._id}}" required data-ng-model="player.firstName">
+
+          <label for="playerLastName{{player._id}}">Last Name:</label>
+          <input type="text" id="playerLastName{{player._id}}" required data-ng-model="player.lastName">
+
+          <label for="position{{player._id}}">Position: </label>
+          <input type="text" id="position{{player._id}}" data-ng-model="player.position" placeholder="-">
+
+          <label for="number{{player._id}}">Number:</label>
+          <input type="text" id="number{{player._id}}" required data-ng-model="player.number">
+
+
+          <label for="team{{player._id}}">Team:</label>
+          <input type="text" id="team{{player._id}}" data-ng-model="player.team" placeholder="free_agent">
+
+          <label for="bat{{player._id}}">Bats:</label>
+          <input type="text" id="bat{{player._id}}" required data-ng-model="player.bat">
+
+          <label for="throwing{{player._id}}">Throws:</label>
+          <input type="text" id="throwing{{player._id}}" required data-ng-model="player.throwing">
+
+
+          <button type="submit">Make Player Change Names!</button>
+          <button data-ng-click="player.editing = false">This player Does Not Deserve A New Name</button>
+        </form>
+        <button data-ng-if="!player.editing" data-ng-click="player.editing = true">This player does not like their name</button>
+
+        <button data-ng-if="!player.editing" data-ng-click="remove(player)">This guy's too old retire him!</button>
+      </li>
+    </ul>
   </main>
-
   <script src="bundle.js"></script>
 </body>
 </html>
