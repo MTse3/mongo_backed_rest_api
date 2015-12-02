@@ -3,7 +3,8 @@ var bcrypt = require('bcrypt');
 var eat = require('eat');
 
 var userSchema = new mongoose.Schema({
-  username: String,
+  //sparce avoids storing null
+  username: {type:String, required: true, unique: true, sparse: true },
   auth: {
     basic: {
       username: String,
@@ -18,8 +19,6 @@ userSchema.methods.hashPassword = function(password) {
 };
 
 userSchema.methods.checkPassword = function(password) {
-  console.log(password);
-  console.log(this.auth.basic.password);
   return bcrypt.compareSync(password, this.auth.basic.password);
 };
 

@@ -9,8 +9,6 @@ var User = require(__dirname + '/../models/user');
 var eatAuth = require(__dirname + '/../lib/eat_auth');
 var httpAuth = require(__dirname + '/../lib/http_authentication');
 
-// var Player = require(__dirname + '/../models/player');
-
 describe('http authentication', function() {
   it('should be able to parse http authentication', function() {
     var req = {
@@ -44,12 +42,23 @@ describe('auth', function() {
         done();
       });
   });
+  it('should not duplicate a user with same username', function(done){
+      var userData = {username: 'usertest', password:'testpass'};
+      chai.request('http://localhost:3000')
+      .post('/signup')
+      .send(userData)
+      .end(function(err, res){
+        expect(err).to.eql(null);
+        // expect(res.body.msg).to.eql('server error');
+        done();
+      });
+  });
 
-  describe('user already in database', function() {
+  describe('when user already defined in database', function() {
     before(function(done) {
       var user = new User();
-      user.username = 'usertest';
-      user.auth.basic.username = 'usertest';
+      user.username = 'newusertest';
+      user.auth.basic.username = 'newusertest';
       user.auth.basic.password = 'test1';
       user.hashPassword('test1');
         user.save(function(err, data) {
@@ -65,10 +74,9 @@ describe('auth', function() {
     it('should be able to sign in', function(done) {
       chai.request('localhost:3000/api')
         .get('/signin')
-        .auth('usertest', 'test1')
+        .auth('newusertest', 'test1')
         .end(function(err, res) {
           expect(err).to.eql(null);
-          console.log(res.body.token)
           expect(res.body.token).to.have.length.above(0);
           done();
         });
@@ -86,7 +94,7 @@ describe('auth', function() {
       };
 
       eatAuth(req, {}, function() {
-        expect(req.user.username).to.eql('usertest');
+        expect(req.user.username).to.eql('newusertest');
         done();
       });
     });
