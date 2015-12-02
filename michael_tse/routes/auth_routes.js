@@ -12,10 +12,6 @@ authRouter.post('/signup', jsonParser, function(req, res) {
   user.username = req.body.username;
   user.hashPassword(req.body.password);
 
-
-  // if (user.username)
-  //needs to check for unique username
-
   user.save(function(err, data) {
     if (err) return handleError(err, res);
 

@@ -9,8 +9,6 @@ var User = require(__dirname + '/../models/user');
 var eatAuth = require(__dirname + '/../lib/eat_auth');
 var httpAuth = require(__dirname + '/../lib/http_authentication');
 
-// var Player = require(__dirname + '/../models/player');
-
 describe('http authentication', function() {
   it('should be able to parse http authentication', function() {
     var req = {
@@ -56,7 +54,7 @@ describe('auth', function() {
       });
   });
 
-  describe('user already in database', function() {
+  describe('when user already defined in database', function() {
     before(function(done) {
       var user = new User();
       user.username = 'newusertest';
@@ -79,7 +77,6 @@ describe('auth', function() {
         .auth('newusertest', 'test1')
         .end(function(err, res) {
           expect(err).to.eql(null);
-          console.log(res.body.token);
           expect(res.body.token).to.have.length.above(0);
           done();
         });

@@ -19,8 +19,6 @@ userSchema.methods.hashPassword = function(password) {
 };
 
 userSchema.methods.checkPassword = function(password) {
-  console.log(password);
-  console.log(this.auth.basic.password);
   return bcrypt.compareSync(password, this.auth.basic.password);
 };
 
