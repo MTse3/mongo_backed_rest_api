@@ -15,7 +15,7 @@ module.exports = function(app) {
     };
 
     $scope.create = function(player) {
-      $http.post('/api/players', player)
+      $http.post('/api/player', player)
         .then(function(res) {
           $scope.players.push(res.data);
           $scope.newPlayer = Object.create(defaults);
@@ -26,7 +26,7 @@ module.exports = function(app) {
 
     $scope.update = function(player) {
       player.editing = false;
-      $http.put('/api/players/' + player._id, player)
+      $http.put('/api/player/' + player._id, player)
         .then(function(res) {
           console.log('this player wants a new name on the back of their jersey');
         }, function(err) {
@@ -37,7 +37,7 @@ module.exports = function(app) {
 
     $scope.remove = function(player) {
       $scope.players.splice($scope.players.indexOf(player), 1);
-      $http.delete('/api/players/' + player._id)
+      $http.delete('/api/player/' + player._id)
         .then(function(res) {
           console.log('player has been retired');
         }, function(err) {

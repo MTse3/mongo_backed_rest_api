@@ -40,9 +40,9 @@
 
     <ul id="playerlist">
       <li data-ng-repeat="player in players">
-        {{player.firstName}}
+        {{player.firstName}} {{player.lastName}}
         <form name="playerForm{{player._id}}" data-ng-submit="update(player)" data-ng-if="player.editing">
-          <h2>Witness Protection for {{player.firstName}}</h2>
+          <h2>Profile for {{player.firstName}} {{player.lastName}}</h2>
 
           <label for="playerFirstName{{player._id}}">First Name:</label>
           <input type="text" id="playerFirstName{{player._id}}" required data-ng-model="player.firstName">
@@ -67,12 +67,12 @@
           <input type="text" id="throwing{{player._id}}" required data-ng-model="player.throwing">
 
 
-          <button type="submit">Make Player Change Names!</button>
-          <button data-ng-click="player.editing = false">This player Does Not Deserve A New Name</button>
+          <button type="submit">Make Player Changes!</button>
+          <button data-ng-click="player.editing = false">Edit this player</button>
         </form>
-        <button data-ng-if="!player.editing" data-ng-click="player.editing = true">This player does not like their name</button>
+        <button data-ng-if="!player.editing" data-ng-click="player.editing = true">This player needs changes</button>
 
-        <button data-ng-if="!player.editing" data-ng-click="remove(player)">This guy's too old retire him!</button>
+        <button data-ng-if="!player.editing" data-ng-click="remove(player)">This guy's a cheater! Remove him!</button>
       </li>
     </ul>
   </main>
