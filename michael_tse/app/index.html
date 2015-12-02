@@ -4,14 +4,17 @@
   <meta charset="UTF-8">
   <title>MLB Player</title>
 </head>
-<body data-ng-app="mlbplayer">
-  <main data-ng-controller="GreetingController">
-    <h1>MLB Player</h1>
-    <h2>{{greeting}}</h2>
+<body data-ng-app="playerApp">
+  <h1>MLB Player</h1>
+  <main data-ng-controller="PlayersController" data-ng-init="getAll()">
+    <ul id="playerlist">
+      <li data-ng-repeat="player in players">{{player.lastName}}</li>
+    </ul>
 
-    <input type="text" data-ng-model="greeting">
 
-    <button data-ng-click="alertGreeting()">Get Player!</button>
+<!--     <input type="text" data-ng-model="greeting">
+
+    <button data-ng-click="alertGreeting()">Get Player!</button> -->
   </main>
 
   <script src="bundle.js"></script>

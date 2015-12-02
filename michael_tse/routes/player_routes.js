@@ -9,11 +9,20 @@ var playerRouter = module.exports = exports = express.Router();
 playerRouter.use(bodyParser.json());
 
 //get request to see the total number of players stored in the database
-playerRouter.get('/player', eatAuth, function(req, res, next) {
+playerRouter.get('/playertotal', function(req, res, next) {
   Player.find().count(function(err, count) {
     if (err) return handleError(err, res);
 
     res.send('The total number of stored players is: ' + count);
+    next();
+  });
+});
+
+playerRouter.get('/player', function(req, res, next) {
+  Player.find({}, function(err, data) {
+    if (err) return handleError(err, res);
+
+    res.json(data);
     next();
   });
 });

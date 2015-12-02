@@ -57,7 +57,7 @@ describe('player routes', function() {
 
   it('should return the total number of players stored in the database', function(done) {
     chai.request('localhost:3000')
-    .get('/api/player')
+    .get('/api/playertotal')
     .end(function(err, res) {
       expect(err).to.eql(null);
       expect(res).to.have.headers;

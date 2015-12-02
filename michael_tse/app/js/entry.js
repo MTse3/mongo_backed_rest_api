@@ -1,11 +1,8 @@
 require('angular/angular');
 var angular = window.angular;
 
-var playerApp = angular.module('mlbplayer', []);
-playerApp.controller('GreetingController', ['$scope', function($scope) {
-  $scope.greeting = 'Go Mariners!';
+var playerApp = angular.module('playerApp', []);
+require('./controllers/controllers')(playerApp)
+require('./players/players')(playerApp);
 
-  $scope.alertGreeting = function() {
-    alert($scope.greeting);
-  };
-}]);
+
