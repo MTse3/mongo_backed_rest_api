@@ -1,12 +1,12 @@
 module.exports = function(app) {
-  app.controller('PlayersController', ['$scope', '$http', function($scope) {
+  app.controller('PlayersController', ['$scope', '$http', function($scope, $http) {
     $scope.players = [];
     // $scope.errors = [];
 
     $scope.getAll = function() {
       $http.get('/api/players')
         .then(function(res) {
-          $scope.bears = res.data;
+          $scope.players = res.data;
         }, function(err) {
           console.log(err.data);
         });
