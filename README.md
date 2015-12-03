@@ -18,7 +18,7 @@ Add a feature of Mongoose that we didn't use class, such as data validation.
 
 Also, implement a non CRUD resource (meaning that it doesn't use the full GET/POST/PUT/PATCH/DELETE interface).
 
- 
+
 
 Rubric
 
@@ -26,3 +26,5 @@ Rubric
   * Use of Mongo: 3pts
   * Tests: 2pts
   * Project Organization: 2pts
+
+valitation help from mongo db docs
