@@ -15,7 +15,7 @@ var playerRouter = module.exports = exports = express.Router();
 //   });
 // });
 
-//get request to get players by team name(team name must start with upper case)
+//get request to get all players
 playerRouter.get('/player/', function(req, res, next) {
   Player.find({}, function(err, data) {
     if (err) return handleError(err, res);
@@ -25,6 +25,15 @@ playerRouter.get('/player/', function(req, res, next) {
   });
 });
 
+//get request to specific players by id
+playerRouter.get('/player/:id', function(req, res, next) {
+  Player.find({_id: req.params.id}, function(err, data) {
+    if(err) return handleError(err, res);
+
+    res.json(data)
+    next();
+  });
+});
 
 //get request to get players by team name(team name must start with upper case)
 playerRouter.get('/player/:team', function(req, res) {
