@@ -2,6 +2,7 @@ module.exports = function(app) {
   app.controller('PlayersController', ['$scope', '$http', function($scope, $http) {
     $scope.players = [];
     $scope.errors = [];
+    // $scope.original = new Set();
     var defaults = {position: '-', team: 'free_agent'};
     $scope.newPlayer = Object.create(defaults);
 
@@ -23,25 +24,40 @@ module.exports = function(app) {
           console.log(err.data)
         });
     };
+    // //sets original
+    // $scope.setBackup = function(player) {
+    //   player.editing = true;
+    //   $scope.original = true;
+    //   $http.get('/api/player/' + player._id, player)
+    //     .then(function(res) {
+    //       console.log(res.data);
+    //       $scope.players = res.data;
 
-    $scope.update = function(player) {
-      player.editing = true;
-      $http.get('/api/player/' + player._id, player)
-        .then(function(res) {
-          console.log(res.data);
-          $scope.players = res.data;
+    //     }, function(err) {
+    //       $scope.errors.push('could not find player: ' + player.name + 'and cancel');
+    //       console.log(err.data);
+    //     });
+    // };
+    // // restores values to original
+    // $scope.cancelChanges = function(player) {
+    //   player.editing = true;
+    //   $scope.original = true;
+    //   $http.get('/api/player/' + player._id, player)
+    //     .then(function(res) {
+    //       console.log(res.data);
+    //       $scope.players = res.data;
 
-        }, function(err) {
-          $scope.errors.push('could not find player: ' + player.name + 'and cancel');
-          console.log(err.data);
-        });
-    };
+    //     }, function(err) {
+    //       $scope.errors.push('could not find player: ' + player.name + 'and cancel');
+    //       console.log(err.data);
+    //     });
+    // };
 
     $scope.update = function(player) {
       player.editing = false;
       $http.put('/api/player/' + player._id, player)
         .then(function(res) {
-          console.log('this player wants a new name on the back of their jersey');
+          console.log('this player wants a change');
         }, function(err) {
           $scope.errors.push('could not get player: ' + player.name + ' to player trial');
           console.log(err.data);
