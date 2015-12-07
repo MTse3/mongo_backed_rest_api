@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-// var gulpWatch = require('gulp-watch');
+var gulpWatch = require('gulp-watch');
 var jshint = require('gulp-jshint');
 var mocha = require('gulp-mocha');
 var appFiles = ['server.js', 'lib/**/*.js'];
@@ -73,6 +73,8 @@ gulp.task('mocha', ['jshint'], function(){
   return gulp.src('./test/player_test.js', {read:false})
   .pipe(mocha({reporter:'spec'}));
 });
+
+gulp.task('watch', ['css:watch']);
 
 gulp.task('jshint', ['jshint:test', 'jshint:app']);
 gulp.task('default', ['jshint', 'mocha']);

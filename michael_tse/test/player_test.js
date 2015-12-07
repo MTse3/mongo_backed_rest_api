@@ -31,7 +31,7 @@ describe('player routes', function() {
 
   it('should be able to get all players from a team', function(done) {
     chai.request('localhost:3000')
-    .get('/api/player/Mariners')
+    .get('/api/player/mariners')
     .end(function(err, res) {
       expect(err).to.eql(null);
       expect(Array.isArray(res.body)).to.eql(true);
@@ -41,7 +41,7 @@ describe('player routes', function() {
 
   it('should return the total number of players stored in the database', function(done) {
     chai.request('localhost:3000')
-    .get('/api/player')
+    .get('/api/player/total')
     .end(function(err, res) {
       expect(err).to.eql(null);
       expect(res).to.have.headers;

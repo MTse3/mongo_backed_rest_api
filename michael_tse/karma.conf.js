@@ -16,6 +16,7 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'test/client/test_bundle.js'
+      // 'test/client/test_entry.js'
     ],
 
 
