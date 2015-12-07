@@ -13,18 +13,19 @@ gulp.task('static:dev', function() {
   .pipe(gulp.dest('build/'));
 });
 
-gulp.task('css:dev', function () {
+gulp.task('css:dev', function() {
   return gulp.src([
+    'app/css/reset.css',
     'app/css/base.css',
     'app/css/layout.css',
     'app/css/module.css',
-    'app/css/state.css'])
-    .pipe(concatCss('styles.min.css'))
-    .pipe(minifyCss())
-    .pipe(gulp.dest('build/'));
+    'app/css/state.css',])
+  .pipe(concatCss('styles.min.css'))
+  .pipe(minifyCss())
+  .pipe(gulp.dest('build/'));
 });
 
-gulp.task('css:watch', function() {
+gulp.task('css:watch', function () {
   gulp.watch('./app/css/**/*.css', ['css:dev']);
 });
 

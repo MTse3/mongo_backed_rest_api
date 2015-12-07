@@ -1,3 +1,11 @@
-* {
-  color: red
+.flex-container {
+}
+
+.inputs-container {
+  display: -webkit-flex; /* Safari */
+  display: flex;
+  -webkit-flex-direction: row; /* Safari */
+  flex-direction:         row;
+  -webkit-flex-wrap: nowrap; /* Safari */
+  flex-wrap:         nowrap;
 }
