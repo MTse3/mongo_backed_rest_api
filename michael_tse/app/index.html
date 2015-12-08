@@ -83,9 +83,9 @@
             </section>
           </article>
           <button class="create-buttons" type="submit">Make Player Changes!</button>
-          <button class="edit-buttons" data-ng-click="player.editing = false">Cancel Changes</button>
+          <button class="edit-buttons" data-ng-click="revertBack(player)">Cancel Changes</button>
         </form>
-        <button class="edit-buttons" data-ng-if="!player.editing" data-ng-click="player.editing = true">This player needs changes</button>
+        <button class="edit-buttons" data-ng-if="!player.editing" data-ng-click="cancelChanges(player)">This player needs changes</button>
 
         <button class="remove-buttons" data-ng-if="!player.editing" data-ng-click="remove(player)">This guy's a cheater! Remove him!</button>
       </li>

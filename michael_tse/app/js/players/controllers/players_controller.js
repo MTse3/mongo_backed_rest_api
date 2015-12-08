@@ -3,7 +3,7 @@ module.exports = function(app) {
   app.controller('PlayersController', ['$scope', '$http', function($scope, $http) {
     $scope.players = [];
     $scope.errors = [];
-    // $scope.original = new Set();
+    $scope.backupPlayer = {};
     var defaults = {position: '-', team: 'free_agent'};
     $scope.newPlayer = Object.create(defaults);
 
@@ -64,20 +64,6 @@ module.exports = function(app) {
     //       console.log(err.data);
     //     });
     // };
-    // // restores values to original
-    // $scope.cancelChanges = function(player) {
-    //   player.editing = true;
-    //   $scope.original = true;
-    //   $http.get('/api/player/' + player._id, player)
-    //     .then(function(res) {
-    //       console.log(res.data);
-    //       $scope.players = res.data;
-
-    //     }, function(err) {
-    //       $scope.errors.push('could not find player: ' + player.name + 'and cancel');
-    //       console.log(err.data);
-    //     });
-    // };
 
     $scope.update = function(player) {
       player.editing = false;
@@ -101,5 +87,32 @@ module.exports = function(app) {
           $scope.getAll();
         });
     };
+
+    $scope.cancelChanges = function(player) {
+      player.editing = true;
+      $scope.backupPlayer[player._id] = {
+        firstName: player.firstName,
+        lastName: player.lastName,
+        position: player.position,
+        number: player.number,
+        team: player.team,
+        bat: player.bat,
+        throwing: player.throwing
+      };
+    };
+
+    // restores values to original
+    $scope.revertBack = function(player) {
+      var backup = $scope.backupPlayer[player._id];
+      player.firstName = backup.firstName,
+      player.lastName= backup.lastName,
+      player.position= backup.position,
+      player.number= backup.number,
+      player.team= backup.team,
+      player.bat= backup.bat,
+      player.throwing= backup.throwing
+    };
+
+
   }]);
 };
