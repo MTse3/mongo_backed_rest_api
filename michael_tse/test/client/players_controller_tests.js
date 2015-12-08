@@ -44,7 +44,7 @@ describe('Player controller', function() {
       $httpBackend.expectPOST('/api/player', {firstName: 'Pablo', lastName: 'Sanchez', position: 'util', number: '0', team: 'free_agent', bat: 'right', throwing: 'right'}).respond(200, {firstName: 'something random', lastName: 'something random'});
       expect($scope.players.length).toBe(0);
       expect($scope.newPlayer).toEqual($scope.defaults);
-      $scope.newPlayer.firstName = 'Alex';
+      $scope.newPlayer.firstName = 'Alexis';
       $scope.create($scope.newPlayer);
       $httpBackend.flush();
       expect($scope.players[0].firstName).toBe('something random');

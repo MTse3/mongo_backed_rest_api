@@ -33,7 +33,7 @@ playerRouter.get('/player/:id', function(req, res) {
 });
 
 //get request to get players by team name(team name must start with upper case)
-playerRouter.get('/player/:team', function(req, res) {
+playerRouter.get('/player/team/:team', function(req, res) {
   Player.find({team: req.params.team.toString() }, function(err, data) {
     if (err) return handleError(err, res);
 
