@@ -6,6 +6,10 @@
   display: flex;
   -webkit-flex-direction: row; /* Safari */
   flex-direction:         row;
-  -webkit-flex-wrap: nowrap; /* Safari */
-  flex-wrap:         nowrap;
+  -webkit-flex-wrap: wrap; /* Safari */
+  flex-wrap:         wrap;
+  -webkit-justify-content: flex-start; /* Safari */
+  justify-content:         flex-start;
 }
+
+

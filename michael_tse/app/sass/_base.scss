@@ -1,0 +1,42 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+@import url(https://fonts.googleapis.com/css?family=Montserrat|Permanent+Marker);
+$font1: 'Montserrat', sans-serif;
+$font2: 'Permanent Marker', cursive;
+$primary-color: #003DA5; // Royal Blue
+$secondary-color: #FFBE00; //California Gold
+
+@mixin button-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+body {
+  background-image: url("http://wallpapercave.com/wp/K5MGxm5.jpg");
+  font-family: $font2;
+  color: $primary-color;
+}
+
+.title, .header {
+  font-family: $font1;
+  color: $secondary-color;
+}
+
+input:focus {
+  backgrond-color: $secondary-color;
+}
+
+.create-buttons {
+  background-color: #00483A;//green
+  color: $secondary-color;
+  @include button-radius(10px);
+}
+
+.remove-buttons {
+  background-color: #DA291C;//red
+}
+
+.edit-buttons{
+  color: blue;
+}
