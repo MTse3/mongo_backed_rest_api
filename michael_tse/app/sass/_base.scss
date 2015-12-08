@@ -2,7 +2,7 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat|Permanent+Marker);
 $font1: 'Montserrat', sans-serif;
 $font2: 'Permanent Marker', cursive;
-$primary-color: #003DA5; // Royal Blue
+$primary-color: #15317E; // Royal Blue
 $secondary-color: #FFBE00; //California Gold
 
 @mixin button-radius($radius) {
@@ -21,6 +21,7 @@ body {
 .title, .header {
   font-family: $font1;
   color: $secondary-color;
+  text-align: center;
 }
 
 input:focus {
@@ -30,7 +31,7 @@ input:focus {
 .create-buttons {
   background-color: #00483A;//green
   color: $secondary-color;
-  @include button-radius(10px);
+  @include button-radius(20px);
 }
 
 .remove-buttons {
