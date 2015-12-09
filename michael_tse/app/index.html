@@ -6,7 +6,6 @@
   <link rel="stylesheet" type="text/css" href="app.css">
 </head>
 <body class="flex-container" data-ng-app="mlbplayer">
-  <div data-dummy-directive data-greeting="HELLOOOOO EEVERYBoday1"></div>
 
 
   <h1 class="title">MLB Player Database</h1>
@@ -17,34 +16,40 @@
 
     <form name="newPlayerForm" data-ng-submit="create(newPlayer)">
       <h2 class="header">Create A New Player for the Database:</h2>
-      <article class="inputs-container">
-        <section class="firstName">
+      <article class="inputs-container row">
+        <section class="firstName, two columns">
           <label for="newPlayerFirstName">First Name:</label>
           <input type="text" id="newPlayerFirstName" required data-ng-model="newPlayer.firstName">
         </section>
-        <section class="lastName">
+        <section class="lastName, two columns">
           <label for="newPlayerLastName">Last Name:</label>
           <input type="text" id="newPlayerLastName" required data-ng-model="newPlayer.lastName">
         </section>
-        <section class="position">
+        <section class="position, two columns">
           <label for="newPlayerPosition">Position: </label>
           <input type="text" id="newPlayerPosition" data-ng-model="newPlayer.postion" placeholder="-">
         </section>
-        <section class="number">
+        <section class="number, one column">
           <label for="newPlayerNumber">Number:</label>
-          <input type="text" id="newPlayerNumber" required data-ng-model="newPlayer.number">
+          <input type="number" min="0" max="99" id="newPlayerNumber" required data-ng-model="newPlayer.number">
         </section>
-        <section class="teamName">
+        <section class="teamName, two columns">
           <label for="newPlayerTeam">Team:</label>
           <input type="text" id="newPlayerTeam" data-ng-model="newPlayer.team" placeholder="free_agent">
         </section>
-        <section class="bat">
+        <section class="bat, one column">
           <label for="newPlayerBat">Bats:</label>
-          <input type="text" id="newPlayerBat" required data-ng-model="newPlayer.bat">
+          <select type="text" id="newPlayerBat" required data-ng-model="newPlayer.bat">
+              <option value="right">right</option>
+              <option value="left">left</option>
+          </select>
         </section>
-        <section class="throw">
+        <section class="throw, one column">
           <label for="newPlayerThrowing">Throws:</label>
-          <input type="text" id="newPlayerThrowing" required data-ng-model="newPlayer.throwing">
+          <select type="text" id="newPlayerThrowing" required data-ng-model="newPlayer.throwing">
+            <option value="right">right</option>
+            <option value="left">left</option>
+          </select>
         </section>
       </article>
       <button class="create-buttons" type="submit" data-ng-disabled="newPlayerForm.$invalid">Create New Player</button>
@@ -58,34 +63,40 @@
 
         <form name="playerForm{{player._id}}" data-ng-submit="update(player)" data-ng-if="player.editing">
           <h2 class="header">Profile for {{player.firstName}} {{player.lastName}}</h2>
-          <article class="inputs-container">
-            <section class="firstName">
+          <article class="inputs-container, row">
+            <section class="firstName, two columns">
               <label for="playerFirstName{{player._id}}">First Name:</label>
               <input type="text" id="playerFirstName{{player._id}}" required data-ng-model="player.firstName">
             </section>
-            <section class="lastName">
+            <section class="lastName, two columns">
               <label for="playerLastName{{player._id}}">Last Name:</label>
               <input type="text" id="playerLastName{{player._id}}" required data-ng-model="player.lastName">
             </section>
-            <section class="position">
+            <section class="position, two columns">
               <label for="position{{player._id}}">Position: </label>
               <input type="text" id="position{{player._id}}" data-ng-model="player.position" placeholder="-">
             </section>
-            <section class="number">
+            <section class="number, one column">
               <label for="number{{player._id}}">Number:</label>
-              <input type="text" id="number{{player._id}}" required data-ng-model="player.number">
+              <input type="number" min="0" max="99" id="number{{player._id}}" required data-ng-model="player.number">
             </section>
-            <section class="teamName">
+            <section class="teamName, two columns">
               <label for="team{{player._id}}">Team:</label>
               <input type="text" id="team{{player._id}}" data-ng-model="player.team" placeholder="free_agent">
             </section>
-            <section class="bat">
+            <section class="bat, one column">
               <label for="bat{{player._id}}">Bats:</label>
-              <input type="text" id="bat{{player._id}}" required data-ng-model="player.bat">
+              <select type="text" id="bat{{player._id}}" required data-ng-model="player.bat">
+                <option value="right">right</option>
+                <option value="left">left</option>
+              </select>
             </section>
-            <section class="throw">
+            <section class="throw, one column">
               <label for="throwing{{player._id}}">Throws:</label>
-              <input type="text" id="throwing{{player._id}}" required data-ng-model="player.throwing">
+              <select type="text" id="throwing{{player._id}}" required data-ng-model="player.throwing">
+              <option value="right">right</option>
+              <option value="left">left</option>
+              </select>
             </section>
           </article>
           <button class="create-buttons" type="submit">Make Player Changes!</button>
