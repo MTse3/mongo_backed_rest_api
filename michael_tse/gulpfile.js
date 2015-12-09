@@ -27,22 +27,6 @@ gulp.task('sass:watch', function () {
   gulp.watch(['./app/sass/**/*.scss', './app/index.html'], ['sass:dev', 'static:dev']);
 });
 
-// gulp.task('css:dev', function() {
-//   return gulp.src([
-//     'app/css/reset.css',
-//     'app/css/base.css',
-//     'app/css/layout.css',
-//     'app/css/module.css',
-//     'app/css/state.css',])
-//   .pipe(concatCss('styles.min.css'))
-//   .pipe(minifyCss())
-//   .pipe(gulp.dest('build/'));
-// });
-
-// gulp.task('css:watch', function () {
-//   gulp.watch('./app/css/**/*.css', ['css:dev']);
-// });
-
 gulp.task('webpack:dev', function() {
   return gulp.src('app/js/entry.js')
   .pipe(webpack({
@@ -88,7 +72,7 @@ gulp.task('mocha', ['jshint'], function(){
   .pipe(mocha({reporter:'spec'}));
 });
 
-gulp.task('watch', ['css:watch']);
+gulp.task('watch', ['sass:watch']);
 
 gulp.task('jshint', ['jshint:test', 'jshint:app']);
 gulp.task('default', ['jshint', 'mocha']);
