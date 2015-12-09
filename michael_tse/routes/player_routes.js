@@ -5,38 +5,35 @@ var handleError = require(__dirname + '/../lib/handleServerError');
 
 var playerRouter = module.exports = exports = express.Router();
 
-// //get request to see the total number of players stored in the database
-// playerRouter.get('/player', function(req, res, next) {
-//   Player.find().count(function(err, count) {
-//     if (err) return handleError(err, res);
+//get request to see the total number of players stored in the database
+playerRouter.get('/player/total', function(req, res) {
+  Player.find().count(function(err, count) {
+    if (err) return handleError(err, res);
 
-//     res.send('The total number of stored players is: ' + count);
-//     next();
-//   });
-// });
+    res.send('The total number of stored players is: ' + count);
+  });
+});
 
 //get request to get all players
-playerRouter.get('/player/', function(req, res, next) {
+playerRouter.get('/player/', function(req, res) {
   Player.find({}, function(err, data) {
     if (err) return handleError(err, res);
 
     res.json(data);
-    next();
   });
 });
 
 //get request to specific players by id
-playerRouter.get('/player/:id', function(req, res, next) {
+playerRouter.get('/player/:id', function(req, res) {
   Player.find({_id: req.params.id}, function(err, data) {
     if(err) return handleError(err, res);
 
     res.json(data)
-    next();
   });
 });
 
 //get request to get players by team name(team name must start with upper case)
-playerRouter.get('/player/:team', function(req, res) {
+playerRouter.get('/player/team/:team', function(req, res) {
   Player.find({team: req.params.team.toString() }, function(err, data) {
     if (err) return handleError(err, res);
 
