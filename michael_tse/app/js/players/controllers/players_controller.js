@@ -8,7 +8,7 @@ module.exports = function(app) {
     $scope.newPlayer = angular.copy($scope.defaults);
     var playerResource = cfResource('player');
 
-    // using services
+    // displays all players in database
     $scope.getAll = function() {
       playerResource.getAll(function (err, data) {
         if (err) return err;
@@ -17,7 +17,7 @@ module.exports = function(app) {
       })
     };
 
-    //using services
+    //adds new player to database
     $scope.create = function(player) {
       playerResource.create(player, function (err, data) {
         if (err) return err;
@@ -27,6 +27,7 @@ module.exports = function(app) {
       });
     };
 
+    //updates existing player in database
     $scope.update = function(player) {
       player.editing = false;
       playerResource.update(player, function (err, data) {
@@ -34,29 +35,16 @@ module.exports = function(app) {
       });
     };
 
-    // $scope.update = function(player) {
-    //   player.editing = false;
-    //   $http.put('/api/player/' + player._id, player)
-    //     .then(function(res) {
-    //       console.log('this player wants a change');
-    //     }, function(err) {
-    //       $scope.errors.push('could not get player: ' + player.name + ' to player trial');
-    //       console.log(err.data);
-    //     });
-    // };
-
+    //removes existing player from database
     $scope.remove = function(player) {
       $scope.players.splice($scope.players.indexOf(player), 1);
-      $http.delete('/api/player/' + player._id)
-        .then(function(res) {
+      playerResource.remove(player, function (err, data) {
+        if (err) return err;
           console.log('player has been retired');
-        }, function(err) {
-          console.log(err.data);
-          $scope.errors.push('could not retire: ' + player.name);
-          $scope.getAll();
-        });
+      });
     };
 
+    //stores database values for specific player
     $scope.cancelChanges = function(player) {
       player.editing = true;
       $scope.backupPlayer[player._id] = {
@@ -70,7 +58,7 @@ module.exports = function(app) {
       };
     };
 
-    // restores values to original
+    //restores values to original
     $scope.revertBack = function(player) {
       var backup = $scope.backupPlayer[player._id];
       player.firstName = backup.firstName,
@@ -81,7 +69,6 @@ module.exports = function(app) {
       player.bat= backup.bat,
       player.throwing= backup.throwing
     };
-
 
   }]);
 };
