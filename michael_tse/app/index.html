@@ -19,7 +19,7 @@
       <article class="inputs-container row">
         <section class="firstName, two columns">
           <label for="newPlayerFirstName">First Name:</label>
-          <input type="text" id="newPlayerFirstName" required data-ng-model="newPlayer.firstName">
+          <input type="text" id="newPlayerFirstName" class="input" required data-ng-model="newPlayer.firstName">
         </section>
         <section class="lastName, two columns">
           <label for="newPlayerLastName">Last Name:</label>
@@ -56,7 +56,7 @@
     </form>
 
     <ul id="playerlist">
-      <li data-ng-repeat="player in players">
+      <li class="individual-player" data-ng-repeat="player in players">
         {{player.firstName}} {{player.lastName}}
 
         <div data-player-directive data-player="player"></div>
