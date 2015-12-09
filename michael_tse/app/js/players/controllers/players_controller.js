@@ -29,14 +29,21 @@ module.exports = function(app) {
 
     $scope.update = function(player) {
       player.editing = false;
-      $http.put('/api/player/' + player._id, player)
-        .then(function(res) {
-          console.log('this player wants a change');
-        }, function(err) {
-          $scope.errors.push('could not get player: ' + player.name + ' to player trial');
-          console.log(err.data);
-        });
+      playerResource.update(player, function (err, data) {
+        if (err) return err;
+      });
     };
+
+    // $scope.update = function(player) {
+    //   player.editing = false;
+    //   $http.put('/api/player/' + player._id, player)
+    //     .then(function(res) {
+    //       console.log('this player wants a change');
+    //     }, function(err) {
+    //       $scope.errors.push('could not get player: ' + player.name + ' to player trial');
+    //       console.log(err.data);
+    //     });
+    // };
 
     $scope.remove = function(player) {
       $scope.players.splice($scope.players.indexOf(player), 1);

@@ -23,6 +23,11 @@ module.exports = function(app) {
         $http.post('/api/' + resourceName, data)
           .then(handleSuccess(callback), handleFail(callback));
       };
+
+      resource.update = function(data, callback) {
+        $http.put('/api/' + resourceName + '/' + data._id, data)
+          .then(handleSuccess(callback), handleFail(callback));
+      };
       return resource;
     };
   }]);
