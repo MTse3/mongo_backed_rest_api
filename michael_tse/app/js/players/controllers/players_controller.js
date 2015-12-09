@@ -5,12 +5,10 @@ module.exports = function(app) {
     $scope.errors = [];
     $scope.backupPlayer = {};
     var defaults = {position: '-', team: 'free_agent'};
-    // $scope.newPlayer = Object.create(defaults);
-
     $scope.newPlayer = angular.copy($scope.defaults);
     var playerResource = cfResource('player');
 
-    // using cfResource
+    // using services
     $scope.getAll = function() {
       playerResource.getAll(function (err, data) {
         if (err) return err;
@@ -19,16 +17,7 @@ module.exports = function(app) {
       })
     };
 
-    // $scope.getAll = function() {
-    //   $http.get('/api/player')
-    //     .then(function(res) {
-    //     $scope.players = res.data;
-    //     }, function(err) {
-    //       console.log(err.data);
-    //     });
-    // };
-
-    //using resource
+    //using services
     $scope.create = function(player) {
       playerResource.create(player, function (err, data) {
         if (err) return err;
@@ -37,16 +26,6 @@ module.exports = function(app) {
 
       });
     };
-
-    // $scope.create = function(player) {
-    //   $http.post('/api/player', player)
-    //     .then(function(res) {
-    //       $scope.players.push(res.data);
-    //       $scope.newPlayer = angular.copy(defaults);
-    //     }, function(err) {
-    //       console.log(err.data)
-    //     });
-    // };
 
     $scope.update = function(player) {
       player.editing = false;
