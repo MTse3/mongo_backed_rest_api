@@ -1,52 +1,52 @@
 var angular = window.angular;
 module.exports = function(app) {
-  app.controller('PlayersController', ['$scope', '$http', function($scope, $http) {
+  app.controller('PlayersController', ['$scope', '$http', 'cfResource', function($scope, $http, cfResource) {
     $scope.players = [];
     $scope.errors = [];
     $scope.backupPlayer = {};
     var defaults = {position: '-', team: 'free_agent'};
-    $scope.newPlayer = Object.create(defaults);
+    // $scope.newPlayer = Object.create(defaults);
 
-    // $scope.newPlayer = angular.copy($scope.defaults);
-    // var playerResource = cfResource('players');
+    $scope.newPlayer = angular.copy($scope.defaults);
+    var playerResource = cfResource('player');
 
-    // using resource
-    // $scope.getAll = function() {
-    //   playerResource.getAll(function (err, data) {
-    //     if (err) return err;
-
-    //     $scope.players = res.data;
-    //   })
-    // };
-
+    // using cfResource
     $scope.getAll = function() {
-      $http.get('/api/player')
-        .then(function(res) {
-        $scope.players = res.data;
-        }, function(err) {
-          console.log(err.data);
-        });
+      playerResource.getAll(function (err, data) {
+        if (err) return err;
+
+        $scope.players = data;
+      })
     };
+
+    // $scope.getAll = function() {
+    //   $http.get('/api/player')
+    //     .then(function(res) {
+    //     $scope.players = res.data;
+    //     }, function(err) {
+    //       console.log(err.data);
+    //     });
+    // };
 
     //using resource
+    $scope.create = function(player) {
+      playerResource.create(player, function (err, data) {
+        if (err) return err;
+          $scope.players.push(data);
+          $scope.newPlayer = angular.copy(defaults);
+
+      });
+    };
+
     // $scope.create = function(player) {
-    //   playerResource.create(player, function (err, data) {
-    //     if (err) return err;
+    //   $http.post('/api/player', player)
+    //     .then(function(res) {
     //       $scope.players.push(res.data);
     //       $scope.newPlayer = angular.copy(defaults);
-
-    //   });
+    //     }, function(err) {
+    //       console.log(err.data)
+    //     });
     // };
-
-    $scope.create = function(player) {
-      $http.post('/api/player', player)
-        .then(function(res) {
-          $scope.players.push(res.data);
-          $scope.newPlayer = angular.copy(defaults);
-        }, function(err) {
-          console.log(err.data)
-        });
-    };
 
     $scope.update = function(player) {
       player.editing = false;

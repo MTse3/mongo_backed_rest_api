@@ -6,6 +6,9 @@
   <link rel="stylesheet" type="text/css" href="styles.min.css">
 </head>
 <body class="flex-container" data-ng-app="mlbplayer">
+  <div data-dummy-directive data-greeting="HELLOOOOO EEVERYBoday1"></div>
+
+
   <h1 class="title">MLB Player Database</h1>
   <main data-ng-controller="PlayersController" data-ng-init="getAll()">
     <ul id="errorslist">
@@ -50,6 +53,9 @@
     <ul id="playerlist">
       <li data-ng-repeat="player in players">
         {{player.firstName}} {{player.lastName}}
+
+        <div data-player-directive data-player="player"></div>
+
         <form name="playerForm{{player._id}}" data-ng-submit="update(player)" data-ng-if="player.editing">
           <h2>Profile for {{player.firstName}} {{player.lastName}}</h2>
           <article class="inputs-container">
