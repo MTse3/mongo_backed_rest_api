@@ -14,7 +14,19 @@
       <li data-ng-repeat="error in errors">{{error}}</li>
     </ul>
 
-    <form name="newPlayerForm" data-ng-submit="create(newPlayer)">
+    <div data-player-transclude-directive data-message-one="another message">
+      here is some text
+    </div>
+    <div data-player-form-directive
+      data-button-text="Create New Player"
+      data-form-name="newPlayerForm"
+      data-heading-text="Create A New Player",
+      data-player="newPlayer"
+      data-save="create(player)"
+    ></div>
+
+
+<!--     <form name="newPlayerForm" data-ng-submit="create(newPlayer)">
       <h2 class="header">Create A New Player for the Database:</h2>
       <article class="inputs-container row">
         <section class="firstName, two columns">
@@ -54,14 +66,14 @@
       </article>
       <button class="create-buttons" type="submit" data-ng-disabled="newPlayerForm.$invalid">Create New Player</button>
     </form>
-
+ -->
     <ul id="playerlist" class="player-list">
       <li class="individual-player" data-ng-repeat="player in players">
         {{player.firstName}} {{player.lastName}}
 
         <div data-player-directive data-player="player"></div>
 
-        <form name="playerForm{{player._id}}" data-ng-submit="update(player)" data-ng-if="player.editing">
+<!--         <form name="playerForm{{player._id}}" data-ng-submit="update(player)" data-ng-if="player.editing">
           <h2 class="header">Profile for {{player.firstName}} {{player.lastName}}</h2>
           <article class="inputs-container, row">
             <section class="firstName, two columns">
@@ -102,7 +114,7 @@
           <button class="create-buttons" type="submit">Make Player Changes!</button>
           <button class="edit-buttons" data-ng-click="revertBack(player)">Cancel Changes</button>
         </form>
-
+ -->
         <button class="edit-buttons" data-ng-if="!player.editing" data-ng-click="cancelChanges(player)">This player needs changes</button>
 
         <button class="remove-buttons" data-ng-if="!player.editing" data-ng-click="remove(player)">This guy's a cheater! Remove him!</button>

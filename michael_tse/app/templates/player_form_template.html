@@ -1,0 +1,41 @@
+<form name="{{formName}}" data-ng-submit="save({player:player})">
+  <h2>{{headingText}}</h2>
+  <h2 class="header">Create A New Player for the Database:</h2>
+  <article class="inputs-container row">
+    <section class="firstName, two columns">
+      <label for="playerFirstName">First Name:</label>
+      <input type="text" id="playerFirstName" class="input" required data-ng-model="player.firstName">
+    </section>
+    <section class="lastName, two columns">
+      <label for="playerLastName">Last Name:</label>
+      <input type="text" id="playerLastName" required data-ng-model="player.lastName">
+    </section>
+    <section class="position, two columns">
+      <label for="playerPosition">Position: </label>
+      <input type="text" id="playerPosition" data-ng-model="player.postion" placeholder="-">
+    </section>
+    <section class="number, one column">
+      <label for="playerNumber">Number:</label>
+      <input type="number" min="0" max="99" id="playerNumber" required data-ng-model="player.number">
+    </section>
+    <section class="teamName, two columns">
+      <label for="playerTeam">Team:</label>
+      <input type="text" id="playerTeam" data-ng-model="player.team" placeholder="free_agent">
+    </section>
+    <section class="bat, one column">
+      <label for="playerBat">Bats:</label>
+      <select type="text" id="playerBat" required data-ng-model="player.bat">
+          <option value="right">right</option>
+          <option value="left">left</option>
+      </select>
+    </section>
+    <section class="throw, one column">
+      <label for="playerThrowing">Throws:</label>
+      <select type="text" id="playerThrowing" required data-ng-model="player.throwing">
+        <option value="right">right</option>
+        <option value="left">left</option>
+      </select>
+    </section>
+  </article>
+  <button class="create-buttons" type="submit">Create New Player {{buttonText}}</button>
+</form>
