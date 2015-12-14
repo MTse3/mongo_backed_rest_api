@@ -1,3 +1,10 @@
+button {
+  border-radius: 20px
+}
+.flex-container {
+  background-color: gray;
+}
+
 .title {
   color: blue;
 }

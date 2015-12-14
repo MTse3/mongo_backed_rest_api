@@ -47,7 +47,7 @@
       <button class="create-buttons" type="submit" data-ng-disabled="newPlayerForm.$invalid">Create New Player</button>
     </form>
 
-    <ul id="playerlist">
+    <ul id="playerlist" class="playerlist-container">
       <li data-ng-repeat="player in players">
         {{player.firstName}} {{player.lastName}}
         <form name="playerForm{{player._id}}" data-ng-submit="update(player)" data-ng-if="player.editing">

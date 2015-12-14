@@ -50,6 +50,9 @@ describe('Player controller', function() {
       expect($scope.players[0].firstName).toBe('something random');
       expect($scope.newPlayer).toEqual($scope.defaults);
     });
+
+
+
   });
 
 });
