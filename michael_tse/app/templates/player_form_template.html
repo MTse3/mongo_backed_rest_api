@@ -1,6 +1,5 @@
 <form name="{{formName}}" data-ng-submit="save({player:player})">
-  <h2>{{headingText}}</h2>
-  <h2 class="header">Create A New Player for the Database:</h2>
+  <h2 class="header">{{headingText}}</h2>
   <article class="inputs-container row">
     <section class="firstName, two columns">
       <label for="playerFirstName">First Name:</label>
@@ -37,5 +36,5 @@
       </select>
     </section>
   </article>
-  <button class="create-buttons" type="submit">Create New Player {{buttonText}}</button>
+  <button class="create-buttons" type="submit">{{buttonText}}</button>
 </form>

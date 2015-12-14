@@ -1,0 +1,40 @@
+<article data-ng-controller="PlayersController" data-ng-init="getAll()">
+    <ul id="errorslist">
+      <li data-ng-repeat="error in errors">{{error}}</li>
+    </ul>
+
+    <section data-player-transclude-directive data-message-one="another message">
+      Dat text doh....
+    </section>
+
+    <section data-player-form-directive
+      data-button-text="Create New Player"
+      data-form-name="newPlayerForm"
+      data-heading-text="Create A New Player for the Database:"
+      data-player="newPlayer"
+      data-save="create(player)"
+    ></section>
+
+<!--     <section data-player-directive data-player="player"></section> -->
+<!-- uses list directive + form directive to edit players -->
+    <section data-list-directive data-title="Database">
+      <li data-ng-repeat="player in players">
+        <section data-player-directive data-player="player"></section>
+        <section data-player-form-directive
+          data-ng-if="player.editing"
+          data-button-text="Save Changes!"
+          data-form-name="edit{{player._id}}"
+          data-player="player"
+          data-heading-text="Profile for {{player.firstName}} {{player.lastName}} "
+          data-save="update(player)">
+
+          <!-- <button class="edit-buttons" data-ng-click="revertBack(player)">Cancel Changes</button> -->
+          <button class="edit-buttons" data-ng-click="player.editing = false">Cancel Changes</button>
+
+        </section>
+        <button class="edit-buttons" data-ng-if="!player.editing" data-ng-click="cancelChanges(player)">This player needs changes</button>
+
+        <button class="remove-buttons" data-ng-if="!player.editing" data-ng-click="remove(player)">This guy's a cheater! Remove him!</button>
+      </li>
+    </ul>
+  </article>

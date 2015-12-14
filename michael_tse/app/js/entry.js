@@ -10,13 +10,13 @@ require('./directives/directives')(mlbplayer);
 
 require('./players/players')(mlbplayer);
 
-// mlbplayer.config(['$routeProvider', funtion($route) {
-//   $route
-//     .when('/player', {
-//       templateUrl: '/templates/player_view.html',
-//       controller: 'PlayersController'
-//     })
-//     .otherwise({
-//       redirectTo: '/player'
-//     })
-// }]);
+mlbplayer.config(['$routeProvider', function($route) {
+  $route
+    .when('/player', {
+      templateUrl: '/templates/players_view.html',
+      controller: 'PlayersController'
+    })
+    .otherwise({
+      redirectTo: '/player'
+    })
+}]);
