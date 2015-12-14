@@ -1,1 +1,1 @@
-require('./players_controller_tests')
+require('./players_controller_tests');

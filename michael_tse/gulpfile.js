@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var gulpWatch = require('gulp-watch');
 var jshint = require('gulp-jshint');
 var mocha = require('gulp-mocha');
 var appFiles = ['server.js', 'lib/**/*.js'];
@@ -12,18 +13,20 @@ gulp.task('static:dev', function() {
   .pipe(gulp.dest('build/'));
 });
 
-gulp.task('css:dev', function () {
+gulp.task('css:dev', function() {
   return gulp.src([
+    'app/css/reset.css',
     'app/css/base.css',
     'app/css/layout.css',
-    'app/css/module.css'])
-    .pipe(concatCss('styles.min.css'))
-    .pipe(minifyCss())
-    .pipe(gulp.dest('build/'));
+    'app/css/module.css',
+    'app/css/state.css',])
+  .pipe(concatCss('styles.min.css'))
+  .pipe(minifyCss())
+  .pipe(gulp.dest('build/'));
 });
 
-gulp.task('css:watch', function() {
-  gulp.watch('./app/css/**/*.css', ['css:dev'])
+gulp.task('css:watch', function () {
+  gulp.watch('./app/css/**/*.css', ['css:dev']);
 });
 
 gulp.task('webpack:dev', function() {
@@ -71,9 +74,9 @@ gulp.task('mocha', ['jshint'], function(){
   .pipe(mocha({reporter:'spec'}));
 });
 
-
+gulp.task('watch', ['css:watch']);
 
 gulp.task('jshint', ['jshint:test', 'jshint:app']);
 gulp.task('default', ['jshint', 'mocha']);
-gulp.task('build:dev', ['webpack:dev', 'static:dev']);
+gulp.task('build:dev', ['webpack:dev', 'static:dev', 'css:dev']);
 gulp.task('default', ['build:dev']);
