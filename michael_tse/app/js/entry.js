@@ -1,11 +1,22 @@
 require('angular/angular');
+require('angular-route')
 var angular = window.angular;
 
-var playerApp = angular.module('mlbplayer', []);
-playerApp.controller('GreetingController', ['$scope', function($scope) {
-  $scope.greeting = 'Go Mariners!';
+var mlbplayer = angular.module('mlbplayer', ['ngRoute']);
+require('./filters/filters')(mlbplayer);
+require('./services/services')(mlbplayer);
+require('./controllers/controllers')(mlbplayer);
+require('./directives/directives')(mlbplayer);
 
-  $scope.alertGreeting = function() {
-    alert($scope.greeting);
-  };
+require('./players/players')(mlbplayer);
+
+mlbplayer.config(['$routeProvider', function($route) {
+  $route
+    .when('/player', {
+      templateUrl: '/templates/players_view.html',
+      controller: 'PlayersController'
+    })
+    .otherwise({
+      redirectTo: '/player'
+    })
 }]);
