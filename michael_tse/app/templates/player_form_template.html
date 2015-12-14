@@ -11,7 +11,7 @@
     </section>
     <section class="position, two columns">
       <label for="playerPosition">Position: </label>
-      <input type="text" id="playerPosition" data-ng-model="player.postion" placeholder="-">
+      <input type="text" id="playerPosition" data-ng-model="player.position" placeholder="-">
     </section>
     <section class="number, one column">
       <label for="playerNumber">Number:</label>
@@ -37,4 +37,5 @@
     </section>
   </article>
   <button class="create-buttons" type="submit">{{buttonText}}</button>
+  <ng-transclude></ng-transclude>
 </form>
