@@ -21,9 +21,9 @@ module.exports = function(app) {
     $scope.create = function(player) {
       playerResource.create(player, function (err, data) {
         if (err) return err;
-          $scope.players.push(data);
-          $scope.newPlayer = angular.copy(defaults);
 
+        $scope.players.push(data);
+        $scope.newPlayer = angular.copy(defaults);
       });
     };
 
@@ -40,7 +40,8 @@ module.exports = function(app) {
       $scope.players.splice($scope.players.indexOf(player), 1);
       playerResource.remove(player, function (err, data) {
         if (err) return err;
-          console.log('player has been retired');
+
+        console.log('player has been retired');
       });
     };
 

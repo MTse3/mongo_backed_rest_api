@@ -57,7 +57,7 @@ describe('Player controller', function() {
       $scope.updatePlayer(player);
       $httpBackend.flush();
       expect(player.editing).toBe(false);
-    })
+    });
 
     it('should be able to delete a player', function() {
       var player = { firstName: 'Jon', lastName: 'Dowd',_id: 1, editing: true};

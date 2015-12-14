@@ -1,0 +1,55 @@
+<article data-ng-controller="PlayersController" data-ng-init="getAll()">
+    <section data-player-transclude-directive data-title-heading="MLB Player Database">
+      <table>
+        <tr class="heading">
+          <td class="table-first-name">First Name</td>
+          <td class="table-last-name">Last Name</td>
+          <td class="table-position">POS</td>
+          <td class="table-number">#</td>
+          <td class="table-team">TEAM</td>
+          <td class="table-bat">BAT</td>
+          <td class="table-throwing">THROW</td>
+        </tr>
+        <tr class="stat" data-ng-repeat="player in players">
+          <td class="table-first-name">{{player.firstName}}</td>
+          <td class="table-last-name">{{player.lastName}}</td>
+          <td class="table-position">{{player.position}}</td>
+          <td class="table-number">{{player.number}}</td>
+          <td class="table-team">{{player.team}}</td>
+          <td class="table-bat">{{player.bat}}</td>
+          <td class="table-throwing">{{player.throwing}}</td>
+        </tr>
+      </table>
+    </section>
+
+    <ul id="errorslist">
+      <li data-ng-repeat="error in errors">{{error}}</li>
+    </ul>
+
+    <section data-player-form-directive
+      data-form-name="newPlayerForm"
+      data-heading-text="Create A New Player for the Database:"
+      data-player="newPlayer"
+      data-save="create(player)"
+    ></section>
+
+    <section data-list-directive data-title="Database">
+      <li data-ng-repeat="player in players">
+        <section data-player-directive data-player="player"></section>
+        <section data-player-form-directive
+          data-ng-if="player.editing"
+          data-button-text="Save Changes!"
+          data-form-name="edit{{player._id}}"
+          data-player="player"
+          data-heading-text="Profile for {{player.firstName}} {{player.lastName}} "
+          data-save="update(player)">
+
+          <button class="edit-buttons" data-ng-click="player.editing = false">Cancel Changes</button>
+
+        </section>
+        <button class="edit-buttons" data-ng-if="!player.editing" data-ng-click="cancelChanges(player)">This player needs changes</button>
+
+        <button class="remove-buttons" data-ng-if="!player.editing" data-ng-click="remove(player)">This guy's a cheater! Remove him!</button>
+      </li>
+    </ul>
+  </article>
