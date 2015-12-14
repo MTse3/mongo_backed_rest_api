@@ -1,84 +1,124 @@
-@import url(https://fonts.googleapis.com/css?family=Montserrat);
-@import url(https://fonts.googleapis.com/css?family=Montserrat|Permanent+Marker);
-$font1: 'Montserrat', sans-serif;
-$font2: 'Permanent Marker', cursive;
-$blue: #15317E !default; //Royal Blue
-$red: #DA291C !default; // Red
-$yellow: #FFBE00 !default; //California Gold
-$green: #00483A !default; //Green
-$primary-color: $blue;
-$secondary-color: $red;
-$tertiary-color: $yellow;
-$button-default-border-size: 3px !default;
-$button-default-border-radius: 20px !default;
-
-@mixin button-radius($radius) {
-  -webkit-border-radius: $radius;
-     -moz-border-radius: $radius;
-      -ms-border-radius: $radius;
-          border-radius: $radius;
-}
+@import "config.scss";
 
 body {
   background-image: url("http://wallpapercave.com/wp/K5MGxm5.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
   font-family: $font1;
   color: $primary-color;
 }
 
-button {
+/* Links
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+a {
+  color: #1EAEDB; }
+a:hover {
+  color: #0FA0CE; }
+
+
+/* Buttons
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.button,
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
   border-width: $button-default-border-size;
+  color: #555;
+  background-color: transparent;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+}
+.button:hover,
+button:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover,
+input[type="button"]:hover,
+.button:focus,
+button:focus,
+input[type="submit"]:focus,
+input[type="reset"]:focus,
+input[type="button"]:focus {
+  color: #333;
+  border-color: #888;
+  outline: 0; }
+.button.button-primary,
+button.button-primary,
+input[type="submit"].button-primary,
+input[type="reset"].button-primary,
+input[type="button"].button-primary {
+  color: #FFF;
+  background-color: #33C3F0;
+  border-color: #33C3F0; }
+.button.button-primary:hover,
+button.button-primary:hover,
+input[type="submit"].button-primary:hover,
+input[type="reset"].button-primary:hover,
+input[type="button"].button-primary:hover,
+.button.button-primary:focus,
+button.button-primary:focus,
+input[type="submit"].button-primary:focus,
+input[type="reset"].button-primary:focus,
+input[type="button"].button-primary:focus {
+  color: #FFF;
+  background-color: #1EAEDB;
+  border-color: #1EAEDB; }
 
+/* Forms
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="text"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+textarea,
+select {
+  background-color: #fff;
+  border: 1px solid #D1D1D1;
+  border-radius: 4px;
+  box-shadow: none;
+}
+/* Removes awkward default styles on some inputs for iOS */
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="text"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+textarea {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+  border: 1px solid #33C3F0;
+  background-color: $yellow;
+  outline: 0;
 }
 
-.title, .header {
-  font-family: $font2;
-  text-align: center;
+/* Code
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+code {
+  background: #F1F1F1;
+  border: 1px solid #E1E1E1;
+  border-radius: 4px;
 }
 
-.title {
-  font-size: 5em;
-  -webkit-text-stroke: 2px $secondary-color;
-  color: $primary-color;
-  text-shadow:
-    3px 3px 0 $secondary-color,
-    -1px -1px 0 $secondary-color,
-    1px -1px 0 $secondary-color,
-    -1px 1px 0 $secondary-color,
-    1px 1px 0 $secondary-color;
+/* Tables
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+th,
+td {
+  border-bottom: 1px solid $yellow;
 }
-
-
-.header {
-  // font-size: 2em;
-  color: $tertiary-color;
-  -webkit-text-stroke: 2px $primary-color;
-}
-
-// .individual-player {
-//   font-family: $font2;
-//   // font-size: 3em;
-//   .individual-player>form, button {
-//     // font-size: 1em;
-//     font-family: $font1;
-//   }
-// }
-
-.create-buttons {
-  background-color: $green;
-  color: $tertiary-color;
-  border-color: $tertiary-color;
-  @include button-radius($button-default-border-radius);
-}
-
-.remove-buttons {
-  background-color: $red;
-  border-color: $red;
-
-}
-
-.edit-buttons{
-  color: $primary-color;
-  border-color: $tertiary-color;
-
-}
-

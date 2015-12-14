@@ -1,16 +1,16 @@
 <article data-ng-controller="PlayersController" data-ng-init="getAll()">
-    <section data-player-transclude-directive data-title-heading="MLB Player Database">
-      <table>
-        <tr class="heading">
-          <td class="table-first-name">First Name</td>
-          <td class="table-last-name">Last Name</td>
-          <td class="table-position">POS</td>
-          <td class="table-number">#</td>
-          <td class="table-team">TEAM</td>
-          <td class="table-bat">BAT</td>
-          <td class="table-throwing">THROW</td>
+    <section class="player-table" data-player-transclude-directive data-title-heading="MLB Player Database">
+      <table class="mlb-table">
+        <tr class="mlb-table-heading">
+          <th class="table-first-name">First Name</th>
+          <th class="table-last-name">Last Name</th>
+          <th class="table-position">POS</th>
+          <th class="table-number">#</th>
+          <th class="table-team">TEAM</th>
+          <th class="table-bat">BAT</th>
+          <th class="table-throwing">THROW</th>
         </tr>
-        <tr class="stat" data-ng-repeat="player in players">
+        <tr class="mlb-bio-stat" data-ng-repeat="player in players">
           <td class="table-first-name">{{player.firstName}}</td>
           <td class="table-last-name">{{player.lastName}}</td>
           <td class="table-position">{{player.position}}</td>
