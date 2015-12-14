@@ -1,0 +1,20 @@
+.player-table {
+  overflow-x:auto;
+  overflow-y:auto;
+}
+
+.mlb-table {
+  background-color: transparent;
+}
+
+.mlb-table-heading {
+  background-color: $primary-color;
+  color: $secondary-color;
+}
+
+.mlb-bio-stat:nth-child(odd) {
+  background-color: $table-color-odd;
+}
+.mlb-bio-stat:hover {
+  background-color: $yellow;
+}

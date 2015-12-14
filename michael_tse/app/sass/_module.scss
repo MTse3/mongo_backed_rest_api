@@ -1,1 +1,39 @@
-/* for spacing */
+@import 'buttons.scss';
+@import 'tables.scss';
+@import 'forms.scss';
+
+.title, .header {
+  font-family: $font2;
+  text-align: center;
+}
+
+.title {
+  font-size: 5em;
+  -webkit-text-stroke: 2px $secondary-color;
+  color: $primary-color;
+  text-shadow:
+    3px 3px 0 $secondary-color,
+    -1px -1px 0 $secondary-color,
+    1px -1px 0 $secondary-color,
+    -1px 1px 0 $secondary-color,
+    1px 1px 0 $secondary-color;
+}
+
+
+.header {
+  // font-size: 2em;
+  color: $tertiary-color;
+  -webkit-text-stroke: 2px $primary-color;
+}
+
+// .individual-player {
+//   font-family: $font2;
+//   // font-size: 3em;
+//   .individual-player>form, button {
+//     // font-size: 1em;
+//     font-family: $font1;
+//   }
+// }
+
+
+

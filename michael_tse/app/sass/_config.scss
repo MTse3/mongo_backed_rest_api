@@ -1,0 +1,23 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+@import url(https://fonts.googleapis.com/css?family=Montserrat|Permanent+Marker);
+$font1: 'Montserrat', sans-serif;
+$font2: 'Permanent Marker', cursive;
+
+//colors that can be used
+$blue: #15317E !default; //Royal Blue
+$red: #DA291C !default; // Red
+$yellow: #FFBE00 !default; //California Gold
+$green: #00483A !default; //Green
+$light-green: #A5DA73 !default; //light green
+
+//sets theme colors
+$primary-color: $blue;
+$secondary-color: $red;
+$tertiary-color: $yellow;
+
+//for table colors
+$table-color-odd: $light-green;
+
+//for button sizes
+$button-default-border-size: 3px !default;
+$button-default-border-radius: 20px !default;

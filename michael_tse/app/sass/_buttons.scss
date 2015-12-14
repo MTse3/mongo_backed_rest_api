@@ -1,0 +1,24 @@
+@mixin button-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.create-buttons {
+  background-color: $green;
+  color: $tertiary-color;
+  border-color: $tertiary-color;
+  @include button-radius($button-default-border-radius);
+}
+
+.remove-buttons {
+  background-color: $red;
+  border-color: $red;
+
+}
+
+.edit-buttons{
+  color: $primary-color;
+  border-color: $tertiary-color;
+}
