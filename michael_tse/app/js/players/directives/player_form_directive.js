@@ -12,9 +12,11 @@ module.exports =function(app) {
         player: '=',
         save: '&'
       },
-      // controller: function($scope) {
-      //   console.log($scope)
-      // }
-    }
+
+      controller: function($scope) {
+        //default button text
+        if (!$scope.buttonText) $scope.buttonText = 'Create New Player';
+      }
+    };
   });
 };

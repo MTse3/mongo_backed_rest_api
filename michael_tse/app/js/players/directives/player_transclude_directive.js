@@ -5,8 +5,8 @@ module.exports = function(app) {
       templateUrl: '/templates/player_transclude_directive.html',
       transclude: true,
       scope: {
-        messageOne: '@'
-      }
+        titleHeading: '@'
+      },
     }
   });
 };

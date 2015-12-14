@@ -1,22 +1,38 @@
 <article data-ng-controller="PlayersController" data-ng-init="getAll()">
+    <section data-player-transclude-directive data-title-heading="MLB Player Database">
+      <table>
+        <tr class="heading">
+          <td class="table-first-name">First Name</td>
+          <td class="table-last-name">Last Name</td>
+          <td class="table-position">POS</td>
+          <td class="table-number">#</td>
+          <td class="table-team">TEAM</td>
+          <td class="table-bat">BAT</td>
+          <td class="table-throwing">THROW</td>
+        </tr>
+        <tr class="stat" data-ng-repeat="player in players">
+          <td class="table-first-name">{{player.firstName}}</td>
+          <td class="table-last-name">{{player.lastName}}</td>
+          <td class="table-position">{{player.position}}</td>
+          <td class="table-number">{{player.number}}</td>
+          <td class="table-team">{{player.team}}</td>
+          <td class="table-bat">{{player.bat}}</td>
+          <td class="table-throwing">{{player.throwing}}</td>
+        </tr>
+      </table>
+    </section>
+
     <ul id="errorslist">
       <li data-ng-repeat="error in errors">{{error}}</li>
     </ul>
 
-    <section data-player-transclude-directive data-message-one="another message">
-      Dat text doh....
-    </section>
-
     <section data-player-form-directive
-      data-button-text="Create New Player"
       data-form-name="newPlayerForm"
       data-heading-text="Create A New Player for the Database:"
       data-player="newPlayer"
       data-save="create(player)"
     ></section>
 
-<!--     <section data-player-directive data-player="player"></section> -->
-<!-- uses list directive + form directive to edit players -->
     <section data-list-directive data-title="Database">
       <li data-ng-repeat="player in players">
         <section data-player-directive data-player="player"></section>
@@ -28,7 +44,6 @@
           data-heading-text="Profile for {{player.firstName}} {{player.lastName}} "
           data-save="update(player)">
 
-          <!-- <button class="edit-buttons" data-ng-click="revertBack(player)">Cancel Changes</button> -->
           <button class="edit-buttons" data-ng-click="player.editing = false">Cancel Changes</button>
 
         </section>
