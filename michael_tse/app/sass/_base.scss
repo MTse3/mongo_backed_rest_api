@@ -21,6 +21,9 @@ $button-default-border-radius: 20px !default;
 
 body {
   background-image: url("http://wallpapercave.com/wp/K5MGxm5.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
   font-family: $font1;
   color: $primary-color;
 }
