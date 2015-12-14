@@ -5,28 +5,26 @@ var mocha = require('gulp-mocha');
 var appFiles = ['server.js', 'lib/**/*.js'];
 var testFiles = ['./test/**/*.js'];
 var webpack = require('webpack-stream');
-var concatCss = require('gulp-concat-css');
 var minifyCss = require('gulp-minify-css');
+var sass = require('gulp-sass')
+var maps = require('gulp-sourcemaps');
 
 gulp.task('static:dev', function() {
   gulp.src('app/**/*.html')
   .pipe(gulp.dest('build/'));
 });
 
-gulp.task('css:dev', function() {
-  return gulp.src([
-    'app/css/reset.css',
-    'app/css/base.css',
-    'app/css/layout.css',
-    'app/css/module.css',
-    'app/css/state.css',])
-  .pipe(concatCss('styles.min.css'))
+gulp.task('sass:dev', function() {
+  gulp.src('./app/sass/**/*.scss')
+  .pipe(maps.init())
+  .pipe(sass().on('error', sass.logError))
   .pipe(minifyCss())
+  .pipe(maps.write('./'))
   .pipe(gulp.dest('build/'));
 });
 
-gulp.task('css:watch', function () {
-  gulp.watch('./app/css/**/*.css', ['css:dev']);
+gulp.task('sass:watch', function () {
+  gulp.watch(['./app/sass/**/*.scss', './app/index.html'], ['sass:dev', 'static:dev']);
 });
 
 gulp.task('webpack:dev', function() {
@@ -74,9 +72,9 @@ gulp.task('mocha', ['jshint'], function(){
   .pipe(mocha({reporter:'spec'}));
 });
 
-gulp.task('watch', ['css:watch']);
+gulp.task('watch', ['sass:watch']);
 
 gulp.task('jshint', ['jshint:test', 'jshint:app']);
 gulp.task('default', ['jshint', 'mocha']);
-gulp.task('build:dev', ['webpack:dev', 'static:dev', 'css:dev']);
+gulp.task('build:dev', ['webpack:dev', 'static:dev', 'sass:dev', 'webpack:test']);
 gulp.task('default', ['build:dev']);

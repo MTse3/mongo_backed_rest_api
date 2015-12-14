@@ -51,7 +51,21 @@ describe('Player controller', function() {
       expect($scope.newPlayer).toEqual($scope.defaults);
     });
 
+    it('should be able to update a player', function() {
+      var player = { firstName: 'Jon', lastName: 'Dowd',_id: 1, editing: true};
+      $httpBackend.expectPUT('/api/player/1', player).respond(200);
+      $scope.updatePlayer(player);
+      $httpBackend.flush();
+      expect(player.editing).toBe(false);
+    });
 
+    it('should be able to delete a player', function() {
+      var player = { firstName: 'Jon', lastName: 'Dowd',_id: 1, editing: true};
+      $scope.players = [player];
+      $httpBackend.expectDELETE('/api/player/1', player).respond(200);
+      expect($scope.players.length).toBe(0);
+      expect($scope.players.indexOf(player)).toBe(-1);
+    });
 
   });
 
